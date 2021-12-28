@@ -2,6 +2,7 @@ package socialnetwork.repository.database;
 
 import socialnetwork.domain.Account;
 import socialnetwork.domain.Message;
+import socialnetwork.domain.PasswordEncryptor;
 import socialnetwork.domain.User;
 import socialnetwork.domain.validators.Validator;
 import socialnetwork.repository.memory.InMemoryRepository;
@@ -30,21 +31,20 @@ public class LogInDatabaseRepository extends InMemoryRepository<Long, Account> {
         this.validator = validator;
     }
 
-    public Long LogIn(String username, String password_unhashed) {
+    public Long LogIn(String accountUsername, String passwordNotEncrypted) {
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement statement = connection.prepareStatement("SELECT * from accounts WHERE username = (?) AND password = (?)");
              ) {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            messageDigest.update(password_unhashed.getBytes());
-            String passwordHashed = new String(messageDigest.digest());
-            statement.setString(1, username);
-            statement.setString(2, passwordHashed);
+            String passwordEncrypted = PasswordEncryptor.encryptPassword(passwordNotEncrypted);
+            statement.setString(1, accountUsername);
+            statement.setString(2, passwordEncrypted);
+            System.out.println(passwordEncrypted);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 Long idAdd = Long.valueOf(resultSet.getInt("user_id"));
                 return idAdd;
             }
-        } catch (SQLException | NoSuchAlgorithmException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -56,47 +56,9 @@ public class LogInDatabaseRepository extends InMemoryRepository<Long, Account> {
 
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, entity.getId().intValue());
-            ps.setInt(2, entity.getUsername().intValue());
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            messageDigest.update(entity.getPassword().getBytes());
-            String passwordHashed = new String(messageDigest.digest());
-            ps.setString(3, passwordHashed);
-            ps.executeUpdate();
-        } catch (SQLException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public Account delete(Long id) {
-        Message removed = this.findOne(id);
-        super.delete(id);
-        String sql = "DELETE FROM accounts WHERE id = (?)";
-
-        try (Connection connection = DriverManager.getConnection(url, username, password);
-             PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, id.intValue());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return removed;
-    }
-
-
-    public User update(Account entity, Integer status) {
-        super.update(entity);
-        String sql = "UPDATE accounts SET id = ?, _from = ?, _to = ?, _message = ?, _data = ?, _reply = ? WHERE id = ?";
-        try (Connection connection = DriverManager.getConnection(url, username, password);
-             PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, entity.getId().intValue());
-            ps.setInt(2, entity.getFrom().intValue());
-            ps.setString(3, entity.getToHashed());
-            ps.setString(4, entity.getMessage());
-            Timestamp ts = new Timestamp(entity.getDate().toInstant(ZoneOffset.UTC).toEpochMilli());
-            ps.setTimestamp(5, ts);
-            ps.setInt(6, entity.getReply());
+            ps.setString(1, entity.getUsername());
+            ps.setString(2, PasswordEncryptor.encryptPassword(entity.getPassword()));
+            ps.setInt(3, entity.getId().intValue());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -104,12 +66,4 @@ public class LogInDatabaseRepository extends InMemoryRepository<Long, Account> {
         return null;
     }
 
-    private ArrayList toStringtoListConversion(String toString) {
-        ArrayList<Long> toList = new ArrayList<>();
-        String[] toStringLIst = toString.split(",");
-        for (String toElementString : toStringLIst) {
-            toList.add(Long.valueOf(toElementString));
-        }
-        return toList;
-    }
 }

@@ -5,6 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import socialnetwork.config.DBconfigs;
+import socialnetwork.domain.validators.AccountValidator;
+import socialnetwork.repository.database.LogInDatabaseRepository;
 
 import java.io.IOException;
 
@@ -30,7 +33,17 @@ public class Login {
     }
 
     private void checkLogin() throws IOException{
+        LogInDatabaseRepository db = new LogInDatabaseRepository("jdbc:postgresql://localhost:5432/DBRepository", "postgres", DBconfigs.password, new AccountValidator());
         HelloApplication m = new HelloApplication();
+        Long logInResponse = db.LogIn(username.getText(),password.getText());
+        try {
+            if (logInResponse > 0) {
+                m.changeScene("Home.fxml");
+            }
+        }
+        catch (Exception e){
+
+        }
         if(username.getText().equals("mihai") && password.getText().equals("nan")){
             wrongLogin.setText("Success!");
             m.changeScene("Home.fxml");

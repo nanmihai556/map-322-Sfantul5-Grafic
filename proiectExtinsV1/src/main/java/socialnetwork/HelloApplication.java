@@ -6,6 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import socialnetwork.UI.Menu;
+import socialnetwork.config.DBconfigs;
+import socialnetwork.domain.validators.AccountValidator;
+import socialnetwork.domain.validators.MessageValidator;
+import socialnetwork.repository.database.LogInDatabaseRepository;
+import socialnetwork.repository.database.MessageDatabaseRepository;
 
 import java.io.IOException;
 
