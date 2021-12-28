@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import socialnetwork.config.DBconfigs;
 import socialnetwork.domain.validators.AccountValidator;
 import socialnetwork.repository.database.LogInDatabaseRepository;
+import socialnetwork.service.UserService;
 
 import java.io.IOException;
 
@@ -33,11 +34,11 @@ public class Login {
     }
 
     private void checkLogin() throws IOException{
-        HelloApplication m = new HelloApplication();
+        UserService service = HelloApplication.getService();
         Long logInResponse = service.logIn(username.getText(), password.getText());
         try {
             if (logInResponse > 0) {
-                m.changeScene("Home.fxml");
+                HelloApplication.changeScene("Home.fxml");
             }
         }
         catch (Exception e){
@@ -45,7 +46,7 @@ public class Login {
         }
         if(username.getText().equals("mihai") && password.getText().equals("nan")){
             wrongLogin.setText("Success!");
-            m.changeScene("Home.fxml");
+            HelloApplication.changeScene("Home.fxml");
         }
         else if (username.getText().isEmpty() && password.getText().isEmpty()){
             wrongLogin.setText("Please enter your credentials!");
@@ -56,7 +57,6 @@ public class Login {
     }
 
     public void userSignUp() throws IOException{
-        HelloApplication m = new HelloApplication();
-        m.changeScene("SignUp.fxml");
+        HelloApplication.changeScene("SignUp.fxml");
     }
 }

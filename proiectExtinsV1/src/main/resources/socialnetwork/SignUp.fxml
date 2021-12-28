@@ -29,12 +29,12 @@
                   <Font size="21.0" />
                </font>
             </Label>
-            <TextField layoutX="252.0" layoutY="22.0" prefHeight="25.0" prefWidth="195.0" promptText="Username" />
-            <TextField layoutX="252.0" layoutY="54.0" prefHeight="25.0" prefWidth="195.0" promptText="First Name" />
-            <TextField layoutX="252.0" layoutY="86.0" prefHeight="25.0" prefWidth="195.0" promptText="Last name" />
-            <TextField layoutX="253.0" layoutY="118.0" prefHeight="25.0" prefWidth="193.0" promptText="Password" />
-            <TextField layoutX="252.0" layoutY="150.0" prefHeight="25.0" prefWidth="194.0" promptText="Confirm Password" />
-            <Button fx:id="createAccountButton" layoutX="204.0" layoutY="218.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="370.0" style="-fx-background-color: #fc6603;" text="Create account" textFill="#343536">
+            <TextField fx:id="username" layoutX="252.0" layoutY="22.0" prefHeight="25.0" prefWidth="195.0" promptText="Username" />
+            <TextField fx:id="firstName" layoutX="252.0" layoutY="54.0" prefHeight="25.0" prefWidth="195.0" promptText="First Name" />
+            <TextField fx:id="lastName" layoutX="252.0" layoutY="86.0" prefHeight="25.0" prefWidth="195.0" promptText="Last name" />
+            <TextField fx:id="password" layoutX="253.0" layoutY="118.0" prefHeight="25.0" prefWidth="193.0" promptText="Password" />
+            <TextField fx:id="confirmPassword" layoutX="252.0" layoutY="150.0" prefHeight="25.0" prefWidth="194.0" promptText="Confirm Password" />
+            <Button fx:id="createAccountButton" layoutX="204.0" layoutY="218.0" mnemonicParsing="false" onAction="#userSignUp" prefHeight="48.0" prefWidth="370.0" style="-fx-background-color: #fc6603;" text="Create account" textFill="#343536">
                <font>
                   <Font size="24.0" />
                </font>

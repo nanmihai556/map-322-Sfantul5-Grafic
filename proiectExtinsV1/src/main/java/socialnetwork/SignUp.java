@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import socialnetwork.domain.User;
+import socialnetwork.service.UserService;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -30,6 +31,7 @@ public class SignUp {
 
 
     public void userSignUp() throws IOException{
+        UserService service = HelloApplication.getService();
         if(!password.getText().equals(confirmPassword.getText())){
             wrongSignUp.setText("Password and Confirm Password must match");
         }
@@ -40,7 +42,7 @@ public class SignUp {
                 lastName.getText().isEmpty()){
                 wrongSignUp.setText("All fields must be set");
         }
-        else if(service.usernameTaken()){
+        else if(service.usernameTaken(username.getText())){
             wrongSignUp.setText("Username is taken");
         }
         else{
@@ -55,8 +57,7 @@ public class SignUp {
     }
 
     public void back() throws IOException{
-        HelloApplication m = new HelloApplication();
-        m.changeScene("Login.fxml");
+        HelloApplication.changeScene("Login.fxml");
     }
 
 }

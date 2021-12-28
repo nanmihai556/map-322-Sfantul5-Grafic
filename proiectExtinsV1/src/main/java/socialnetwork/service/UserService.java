@@ -253,7 +253,9 @@ public class UserService {
     }
 
     public void addAccount(String AccountUsername, String AccountPassword, Long user_id){
-        repoAccount.save(new Account(AccountUsername,AccountPassword, user_id));
+        Account account = new Account(AccountUsername,AccountPassword, user_id);
+        account.setId(user_id);
+        repoAccount.save(account);
     }
 
     public Boolean usernameTaken(String AccountUsername){

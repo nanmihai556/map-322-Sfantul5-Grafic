@@ -51,13 +51,14 @@ public class LogInDatabaseRepository extends InMemoryRepository<Long, Account> {
 
     public Account save(Account entity) {
         super.save(entity);
-        String sql = "insert into accounts (username, password, user_id) values (?, ?, ?)";
+        String sql = "insert into accounts (id, username, password, user_id) values (?, ?, ?, ?)";
 
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, entity.getUsername());
-            ps.setString(2, PasswordEncryptor.encryptPassword(entity.getPassword()));
-            ps.setInt(3, entity.getId().intValue());
+            ps.setInt(1, entity.getId().intValue());
+            ps.setString(2, entity.getUsername());
+            ps.setString(3, PasswordEncryptor.encryptPassword(entity.getPassword()));
+            ps.setInt(4, entity.getUser_id().intValue());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

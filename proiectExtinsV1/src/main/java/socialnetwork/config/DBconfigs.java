@@ -1,5 +1,5 @@
 package socialnetwork.config;
 
 public class DBconfigs {
-    public static String password = "mining";
+    public static String password = "postgres";
 }
