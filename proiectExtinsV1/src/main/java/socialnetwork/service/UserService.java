@@ -1,9 +1,11 @@
 package socialnetwork.service;
 
+import socialnetwork.domain.Account;
 import socialnetwork.domain.Graph;
 import socialnetwork.domain.Message;
 import socialnetwork.domain.User;
 import socialnetwork.repository.database.DatabaseRepository;
+import socialnetwork.repository.database.LogInDatabaseRepository;
 import socialnetwork.repository.database.MessageDatabaseRepository;
 
 import java.time.LocalDateTime;
@@ -17,10 +19,12 @@ import java.util.stream.Collectors;
 public class UserService {
     private DatabaseRepository repo;
     private MessageDatabaseRepository repoMessage;
+    private LogInDatabaseRepository repoAccount;
 
-    public UserService(DatabaseRepository repo, MessageDatabaseRepository messageRepo) {
+    public UserService(DatabaseRepository repo, MessageDatabaseRepository messageRepo, LogInDatabaseRepository repoAccount) {
         this.repo = repo;
         this.repoMessage = messageRepo;
+        this.repoAccount = repoAccount;
     }
 
     public User addUser(User user) {
@@ -246,5 +250,17 @@ public class UserService {
         Message MessageObj = new Message(userid1, to, message, localDt, reply);
         MessageObj.setId(this.getDbMaxId() + 1L);
         repoMessage.save(MessageObj);
+    }
+
+    public void addAccount(String AccountUsername, String AccountPassword, Long user_id){
+        repoAccount.save(new Account(AccountUsername,AccountPassword, user_id));
+    }
+
+    public Boolean usernameTaken(String AccountUsername){
+        return repoAccount.usernameTaken(AccountUsername);
+    }
+
+    public Long logIn(String AccountUsername, String AccountPassword){
+        return repoAccount.LogIn(AccountUsername, AccountPassword);
     }
 }

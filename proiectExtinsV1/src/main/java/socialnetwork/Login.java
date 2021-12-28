@@ -33,9 +33,8 @@ public class Login {
     }
 
     private void checkLogin() throws IOException{
-        LogInDatabaseRepository db = new LogInDatabaseRepository("jdbc:postgresql://localhost:5432/DBRepository", "postgres", DBconfigs.password, new AccountValidator());
         HelloApplication m = new HelloApplication();
-        Long logInResponse = db.LogIn(username.getText(),password.getText());
+        Long logInResponse = service.logIn(username.getText(), password.getText());
         try {
             if (logInResponse > 0) {
                 m.changeScene("Home.fxml");

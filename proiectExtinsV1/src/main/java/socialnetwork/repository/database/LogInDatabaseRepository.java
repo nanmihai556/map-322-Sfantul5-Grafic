@@ -38,7 +38,6 @@ public class LogInDatabaseRepository extends InMemoryRepository<Long, Account> {
             String passwordEncrypted = PasswordEncryptor.encryptPassword(passwordNotEncrypted);
             statement.setString(1, accountUsername);
             statement.setString(2, passwordEncrypted);
-            System.out.println(passwordEncrypted);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 Long idAdd = Long.valueOf(resultSet.getInt("user_id"));
@@ -64,6 +63,21 @@ public class LogInDatabaseRepository extends InMemoryRepository<Long, Account> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Boolean usernameTaken(String AccountUsername){
+        try (Connection connection = DriverManager.getConnection(url, username, password);
+             PreparedStatement statement = connection.prepareStatement("SELECT * from accounts WHERE username = (?)");
+        ) {
+            statement.setString(1, AccountUsername);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }
