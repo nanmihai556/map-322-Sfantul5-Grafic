@@ -81,4 +81,19 @@ public class LogInDatabaseRepository extends InMemoryRepository<Long, Account> {
         return false;
     }
 
+    public String getUsername(Long id) {
+        try (Connection connection = DriverManager.getConnection(url, username, password);
+             PreparedStatement statement = connection.prepareStatement("SELECT * from accounts WHERE user_id = (?)");
+        ) {
+            statement.setInt(1, id.intValue());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("username");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

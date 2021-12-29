@@ -53,6 +53,7 @@ public class SignUp {
             newAccount.setId(id);
             service.addUser(newAccount);
             service.addAccount(username.getText(), password.getText(), id);
+            HelloApplication.changeScene("Login.fxml");
         }
     }
 

@@ -265,4 +265,7 @@ public class UserService {
     public Long logIn(String AccountUsername, String AccountPassword){
         return repoAccount.LogIn(AccountUsername, AccountPassword);
     }
+    public String getUsername(Long id){
+        return repoAccount.getUsername(id);
+    }
 }

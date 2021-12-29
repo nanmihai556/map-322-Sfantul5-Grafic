@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import socialnetwork.config.DBconfigs;
+import socialnetwork.domain.CurrentUserSingleton;
+import socialnetwork.domain.MainUserSingleton;
 import socialnetwork.domain.validators.AccountValidator;
 import socialnetwork.repository.database.LogInDatabaseRepository;
 import socialnetwork.service.UserService;
@@ -38,11 +40,12 @@ public class Login {
         Long logInResponse = service.logIn(username.getText(), password.getText());
         try {
             if (logInResponse > 0) {
+                MainUserSingleton.getInstance().setUser(logInResponse);
                 HelloApplication.changeScene("Home.fxml");
             }
         }
         catch (Exception e){
-
+            System.out.println(e);
         }
         if(username.getText().equals("mihai") && password.getText().equals("nan")){
             wrongLogin.setText("Success!");
