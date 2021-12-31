@@ -14,6 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import socialnetwork.config.DBconfigs;
 import socialnetwork.domain.CurrentUserSingleton;
+import socialnetwork.domain.MainUserSingleton;
 import socialnetwork.domain.User;
 import socialnetwork.domain.validators.AccountValidator;
 import socialnetwork.domain.validators.MessageValidator;
@@ -34,10 +35,10 @@ public class UserPage implements Initializable {
     private Button LogoutButton;
 
     @FXML
-    private Button FriendsButton;
+    private Button removeFriendRequestButton;
 
     @FXML
-    private Button FriendRequestsButton;
+    private Button addFriendButton;
 
     @FXML
     private Label currentUsername;
@@ -57,12 +58,38 @@ public class UserPage implements Initializable {
         FirstNameLastName.setText(name);
         List<Long> currentUserFriends = service.getFriendsAccepted(service.getUserById(userId));
         for (Long user: currentUserFriends){
-            FriendListVbox.getChildren().addAll(getFriendHbox(service.getUserById(user)));
+            if(!user.equals(MainUserSingleton.getInstance().getUser()))
+                FriendListVbox.getChildren().addAll(getFriendHbox(service.getUserById(user)));
+        }
+        if (!service.areFriends(MainUserSingleton.getInstance().getUser(),CurrentUserSingleton.getInstance().getUser())){
+            addFriendButton.setOpacity(1.0D);
+        }
+        if(service.didF1RequestF2(MainUserSingleton.getInstance().getUser(),CurrentUserSingleton.getInstance().getUser())){
+            removeFriendRequestButton.setOpacity(1.0D);
         }
     }
     public void userLogout(ActionEvent event) throws IOException {
-        HelloApplication m = new HelloApplication();
-        m.changeScene("Login.fxml");
+        HelloApplication.changeScene("Home.fxml");
+    }
+
+    public void addFriend(ActionEvent event) throws IOException {
+        HelloApplication.getService().addFriend(MainUserSingleton.getInstance().getUser(),CurrentUserSingleton.getInstance().getUser(),0);
+        try{
+            HelloApplication.changeScene("UserPage.fxml");
+        }
+        catch(Exception e){
+            System.err.println(e);
+        }
+    }
+
+    public void removeFriend(ActionEvent event) throws IOException {
+        HelloApplication.getService().removeFriend(MainUserSingleton.getInstance().getUser(),CurrentUserSingleton.getInstance().getUser());
+        try{
+            HelloApplication.changeScene("UserPage.fxml");
+        }
+        catch(Exception e){
+
+        }
     }
 
     private String userInfo(User user){
