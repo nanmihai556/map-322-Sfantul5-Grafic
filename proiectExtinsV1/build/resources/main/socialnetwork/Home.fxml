@@ -7,11 +7,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #343536;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="socialnetwork.Home">
    <top>
-      <AnchorPane prefHeight="105.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="115.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="currentUsername" layoutX="16.0" layoutY="14.0" prefHeight="41.0" prefWidth="149.0" style="-fx-alignment: center;" text="username" textFill="#fc6603">
                <font>
@@ -33,7 +36,7 @@
                   <Font size="19.0" />
                </font>
             </TextField>
-            <ImageView fitHeight="139.0" fitWidth="194.0" layoutX="647.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="147.0" fitWidth="132.0" layoutX="647.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Sfantul%205.png" />
                </image>
@@ -42,13 +45,8 @@
       </AnchorPane>
    </top>
    <left>
-      <AnchorPane prefHeight="357.0" prefWidth="180.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="364.0" prefWidth="157.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="friendsButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#userLogout" prefHeight="27.0" prefWidth="81.0" style="-fx-background-color: #fc6603;" text="Friends">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
             <Button fx:id="friendRequestsButton" layoutX="14.0" layoutY="57.0" mnemonicParsing="false" onAction="#userLogout" prefHeight="30.0" prefWidth="116.0" style="-fx-background-color: #fc6603;" text="Friend requests">
                <font>
                   <Font size="14.0" />
@@ -57,4 +55,17 @@
          </children>
       </AnchorPane>
    </left>
+   <center>
+      <AnchorPane prefHeight="364.0" prefWidth="603.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f06103" height="41.0" layoutX="49.0" stroke="BLACK" strokeType="INSIDE" width="368.0" />
+            <VBox fx:id="FriendListVbox" layoutX="49.0" layoutY="41.0" prefHeight="304.0" prefWidth="374.0" />
+            <Text layoutX="168.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Friends" wrappingWidth="129.162109375">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </center>
 </BorderPane>

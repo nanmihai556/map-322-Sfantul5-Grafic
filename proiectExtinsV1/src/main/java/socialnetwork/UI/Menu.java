@@ -17,7 +17,7 @@ public class Menu {
     private UserService service;
 
     public void menu() {
-        menuInitializare();
+        //menuInitializare();
         menuService();
     }
 
@@ -101,13 +101,6 @@ public class Menu {
                 service.rejectFriendRequest(id1, id2);
             }
         }
-    }
-
-    public void menuInitializare() {
-        service = new UserService(
-                new DatabaseRepository("jdbc:postgresql://localhost:5432/DBRepository", "postgres", DBconfigs.password, new UtilizatorValidator()),
-                new MessageDatabaseRepository("jdbc:postgresql://localhost:5432/DBRepository", "postgres", DBconfigs.password, new MessageValidator())
-        );
     }
 
     public int serviceChoice() {
