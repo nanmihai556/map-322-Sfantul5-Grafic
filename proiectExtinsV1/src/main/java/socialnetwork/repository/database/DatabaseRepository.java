@@ -173,6 +173,26 @@ public class DatabaseRepository extends InMemoryRepository<Long, User> {
         return null;
     }
 
+    public Boolean areFriends(Long userID1, Long userID2){
+        String sql = "SELECT date FROM friends WHERE id_friend_1 IN (?,?) AND id_friend_2 IN (?,?)";
+        try (Connection connection = DriverManager.getConnection(url, username, password);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userID1.intValue());
+            ps.setInt(2, userID2.intValue());
+            ps.setInt(3, userID1.intValue());
+            ps.setInt(4, userID2.intValue());
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public void setStatusFriendRequests(User user1, User user2, Integer status) {
         // status = 0->pending; 1->accepted; 2->rejected
         String sql = "UPDATE friends SET status = ? WHERE id_friend_1 IN (?,?) AND id_friend_2 IN (?,?)";
@@ -236,6 +256,47 @@ public class DatabaseRepository extends InMemoryRepository<Long, User> {
 
     public ArrayList<Long> getFriendsAccepted(User entity) {
         return getFriendsBase(entity, 1);
+    }
+
+    public ArrayList<Long> getFriendsRejected(User entity) {
+        return getFriendsBase(entity, 2);
+    }
+
+    public ArrayList<Long> getFriendsPending(User entity) {
+        ArrayList<Long> friends = new ArrayList<>();
+        String sql = "SELECT * FROM friends WHERE id_friend_2 = (?) AND status = 0";
+        try (Connection connection = DriverManager.getConnection(url, username, password);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, entity.getId().intValue());
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                Long idf1 = (long) resultSet.getInt("id_friend_1");
+                friends.add(idf1);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return friends;
+    }
+
+    public Boolean didF1RequestF2(Long F1, Long F2) {
+        ArrayList<Long> friends = new ArrayList<>();
+        String sql = "SELECT * FROM friends WHERE id_friend_1 = ? AND id_friend_2 = ? AND status = 0";
+        try (Connection connection = DriverManager.getConnection(url, username, password);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, F1.intValue());
+            ps.setInt(2, F2.intValue());
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private ArrayList<Long> getFriendsBase(User entity, Integer Status) {

@@ -47,7 +47,7 @@
    <left>
       <AnchorPane prefHeight="364.0" prefWidth="157.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="friendRequestsButton" layoutX="14.0" layoutY="57.0" mnemonicParsing="false" onAction="#userLogout" prefHeight="30.0" prefWidth="116.0" style="-fx-background-color: #fc6603;" text="Friend requests">
+            <Button fx:id="friendRequestsButton" layoutX="14.0" layoutY="57.0" mnemonicParsing="false" onAction="#userFriendRequestPage" prefHeight="30.0" prefWidth="116.0" style="-fx-background-color: #fc6603;" text="Friend requests">
                <font>
                   <Font size="14.0" />
                </font>

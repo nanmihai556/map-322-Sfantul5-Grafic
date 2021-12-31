@@ -245,6 +245,22 @@ public class UserService {
         return repo.getFriendsAccepted(entity);
     }
 
+    public ArrayList<Long> getFriendsRejected(User entity){
+        return repo.getFriendsRejected(entity);
+    }
+
+    public ArrayList<Long> getFriendsPending(User entity){
+        return repo.getFriendsPending(entity);
+    }
+
+    public Boolean didF1RequestF2(Long F1,Long F2){
+        return repo.didF1RequestF2(F1, F2);
+    }
+
+    public Boolean areFriends(Long userID1,Long userID2){
+        return repo.areFriends(userID1, userID2);
+    }
+
     public void addMessage(Long userid1, ArrayList<Long> to, String message, Integer reply) {
         LocalDateTime localDt = LocalDateTime.now();
         Message MessageObj = new Message(userid1, to, message, localDt, reply);

@@ -56,8 +56,11 @@ public class Home implements Initializable {
     private VBox FriendListVbox;
 
     public void userLogout(ActionEvent event) throws IOException{
-        HelloApplication m = new HelloApplication();
-        m.changeScene("Login.fxml");
+        HelloApplication.changeScene("Login.fxml");
+    }
+
+    public void userFriendRequestPage(ActionEvent event) throws  IOException{
+        HelloApplication.changeScene("FriendRequests.fxml");
     }
 
     @Override
@@ -69,7 +72,6 @@ public class Home implements Initializable {
         FirstNameLastName.setText(name);
         List<Long> currentUserFriends = service.getFriendsAccepted(service.getUserById(userId));
         for (Long user: currentUserFriends){
-            System.out.println("aici");
             FriendListVbox.getChildren().addAll(getFriendHbox(service.getUserById(user)));
         }
     }
@@ -95,7 +97,7 @@ public class Home implements Initializable {
                     HelloApplication.changeScene("UserPage.fxml");
                 }
                 catch(Exception e){
-
+                    System.out.println(e);
                 }
             }
         });
