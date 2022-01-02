@@ -90,9 +90,9 @@ public class FriendRequestPage implements Initializable {
         Text userName = new Text(userInfo(user));
         Text userDate = new Text(dateOfFriendShip(user));
         userHBox.setSpacing(10);
-        userName.setFill(Color.WHITE);
+        userName.setFill(Color.BLACK);
         userName.setFont(Font.font ("Verdana", 20));
-        userDate.setFill(Color.WHITE);
+        userDate.setFill(Color.BLACK);
         userDate.setFont(Font.font ("Verdana", 10));
         Button acceptFriends = new Button("Accept");
         acceptFriends.setStyle("-fx-background-color: #f06103; ");
@@ -136,11 +136,11 @@ public class FriendRequestPage implements Initializable {
         Text userDate = new Text(dateOfFriendShip(user));
         Text userStatus = new Text(status);
         userHBox.setSpacing(10);
-        userName.setFill(Color.WHITE);
+        userName.setFill(Color.BLACK);
         userName.setFont(Font.font ("Verdana", 20));
-        userDate.setFill(Color.WHITE);
+        userDate.setFill(Color.BLACK);
         userDate.setFont(Font.font ("Verdana", 10));
-        userStatus.setFill(Color.WHITE);
+        userStatus.setFill(Color.BLACK);
         userStatus.setFont(Font.font ("Verdana", 20));
         userHBox.getChildren().addAll(userName,userStatus,userDate);
         return userHBox;

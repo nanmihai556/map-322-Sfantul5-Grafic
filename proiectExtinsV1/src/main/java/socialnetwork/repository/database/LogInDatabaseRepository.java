@@ -40,8 +40,8 @@ public class LogInDatabaseRepository extends InMemoryRepository<Long, Account> {
             statement.setString(2, passwordEncrypted);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                Long idAdd = Long.valueOf(resultSet.getInt("user_id"));
-                return idAdd;
+                Long user_id = (long) resultSet.getInt("user_id");
+                return user_id;
             }
         } catch (SQLException e) {
             e.printStackTrace();

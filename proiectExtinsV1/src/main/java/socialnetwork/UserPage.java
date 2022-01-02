@@ -39,7 +39,10 @@ public class UserPage implements Initializable {
 
     @FXML
     private Button addFriendButton;
-
+    @FXML
+    private Button friendsButton2;
+    @FXML
+    private Button removeFriendButton;
     @FXML
     private Label currentUsername;
 
@@ -63,10 +66,22 @@ public class UserPage implements Initializable {
         }
         if (!service.areFriends(MainUserSingleton.getInstance().getUser(),CurrentUserSingleton.getInstance().getUser())){
             addFriendButton.setOpacity(1.0D);
+            addFriendButton.setDisable(false);
+        }
+        if (
+                service.areFriends(MainUserSingleton.getInstance().getUser(),CurrentUserSingleton.getInstance().getUser())&&
+                !service.didF1RequestF2(MainUserSingleton.getInstance().getUser(),CurrentUserSingleton.getInstance().getUser())
+        ){
+            removeFriendButton.setOpacity(1.0D);
+            removeFriendButton.setDisable(false);
+            friendsButton2.setOpacity(1.0D);
+            friendsButton2.setDisable(false);
         }
         if(service.didF1RequestF2(MainUserSingleton.getInstance().getUser(),CurrentUserSingleton.getInstance().getUser())){
             removeFriendRequestButton.setOpacity(1.0D);
+            removeFriendRequestButton.setDisable(false);
         }
+
     }
     public void userLogout(ActionEvent event) throws IOException {
         HelloApplication.changeScene("Home.fxml");
@@ -99,7 +114,7 @@ public class UserPage implements Initializable {
     private HBox getFriendHbox(User user){
         HBox userHBox = new HBox();
         Text userName = new Text(userInfo(user));
-        userName.setFill(Color.WHITE);
+        userName.setFill(Color.BLACK);
         userName.setFont(Font.font ("Verdana", 20));
         Button seeFriends = new Button("Click to see Profile");
         seeFriends.setStyle("-fx-background-color: #f06103; ");

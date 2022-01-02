@@ -71,8 +71,8 @@ public class Home implements Initializable {
         String name = service.getUserById(userId).getFirstName() + " " + service.getUserById(userId).getLastName();
         FirstNameLastName.setText(name);
         List<Long> currentUserFriends = service.getFriendsAccepted(service.getUserById(userId));
-        for (Long user: currentUserFriends){
-            FriendListVbox.getChildren().addAll(getFriendHbox(service.getUserById(user)));
+        for (Long user : currentUserFriends) {
+                FriendListVbox.getChildren().addAll(getFriendHbox(service.getUserById(user)));
         }
     }
 
@@ -83,7 +83,7 @@ public class Home implements Initializable {
     private HBox getFriendHbox(User user){
         HBox userHBox = new HBox();
         Text userName = new Text(userInfo(user));
-        userName.setFill(Color.WHITE);
+        userName.setFill(Color.BLACK);
         userName.setFont(Font.font ("Verdana", 20));
         Button seeFriends = new Button("Click to see Profile");
         seeFriends.setStyle("-fx-background-color: #f06103; ");
@@ -93,6 +93,7 @@ public class Home implements Initializable {
             public void handle(ActionEvent event){
                 Button btn = (Button) event.getSource();
                 CurrentUserSingleton.getInstance().setUser(Long.valueOf(btn.getId()));
+
                 try{
                     HelloApplication.changeScene("UserPage.fxml");
                 }
