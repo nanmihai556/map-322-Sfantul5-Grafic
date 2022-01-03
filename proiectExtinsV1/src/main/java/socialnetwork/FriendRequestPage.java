@@ -145,4 +145,7 @@ public class FriendRequestPage implements Initializable {
         userHBox.getChildren().addAll(userName,userStatus,userDate);
         return userHBox;
     }
-}
+
+    public void seeChat(ActionEvent event) throws IOException {
+        HelloApplication.changeScene("Chat.fxml");
+    }}
