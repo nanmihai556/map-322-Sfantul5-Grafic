@@ -93,7 +93,7 @@ public class Home implements Initializable {
             public void handle(ActionEvent event){
                 Button btn = (Button) event.getSource();
                 CurrentUserSingleton.getInstance().setUser(Long.valueOf(btn.getId()));
-
+                CurrentUserSingleton.getInstance().setUser(9L);
                 try{
                     HelloApplication.changeScene("UserPage.fxml");
                 }
