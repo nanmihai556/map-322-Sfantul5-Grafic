@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -32,11 +31,6 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <TextField fx:id="searchBar" layoutX="191.0" layoutY="54.0" prefHeight="40.0" prefWidth="419.0" promptText="Search..." style="-fx-background-color: #48494a;">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </TextField>
             <ImageView fitHeight="147.0" fitWidth="132.0" layoutX="647.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Sfantul%205.png" />
@@ -48,6 +42,11 @@
                   <Font size="29.0" />
                </font>
             </Text>
+            <Button fx:id="searchButton" layoutX="191.0" layoutY="45.0" mnemonicParsing="false" onAction="#toSearch" prefHeight="47.0" prefWidth="169.0" style="-fx-background-color: #fc6603;" text="Search for users">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </top>
