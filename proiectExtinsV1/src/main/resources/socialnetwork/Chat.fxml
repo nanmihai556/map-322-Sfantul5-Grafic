@@ -40,22 +40,27 @@
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
+            <Button fx:id="refreshButton" layoutX="14.0" layoutY="106.0" mnemonicParsing="false" onAction="#refresh" prefHeight="33.0" prefWidth="86.0" style="-fx-background-color: #fc6603;" text="Refresh">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </top>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane layoutX="18.0" layoutY="6.0" prefHeight="240.0" prefWidth="752.0" stylesheets="@../../java/socialnetwork/config/scrollPaneStyle.css">
+            <ScrollPane layoutX="18.0" layoutY="6.0" prefHeight="240.0" prefWidth="752.0">
                <content>
-                  <VBox fx:id="chatVBox" prefHeight="238.0" prefWidth="750.0" style="-fx-background-color: #343536;" />
+                  <VBox fx:id="chatVBox" prefHeight="238.0" prefWidth="753.0" style="-fx-background-color: #343536;" />
                </content></ScrollPane>
-            <TextField layoutX="18.0" layoutY="258.0" prefHeight="44.0" prefWidth="546.0" promptText="Chat..." style="-fx-background-color: #48494a;">
+            <TextField fx:id="chatField" layoutX="18.0" layoutY="258.0" prefHeight="44.0" prefWidth="546.0" promptText="Chat..." style="-fx-background-color: #48494a;">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <Button fx:id="sendButton" layoutX="597.0" layoutY="258.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="170.0" style="-fx-background-color: #fc6603;" text="Send">
+            <Button fx:id="sendButton" layoutX="597.0" layoutY="258.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="44.0" prefWidth="170.0" style="-fx-background-color: #fc6603;" text="Send">
                <font>
                   <Font size="14.0" />
                </font>

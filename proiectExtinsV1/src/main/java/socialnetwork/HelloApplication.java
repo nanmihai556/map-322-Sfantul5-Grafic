@@ -35,7 +35,7 @@ public class HelloApplication extends Application {
                 new MessageDatabaseRepository("jdbc:postgresql://localhost:5432/DBRepository", "postgres", DBconfigs.password, new MessageValidator()),
                 new LogInDatabaseRepository("jdbc:postgresql://localhost:5432/DBRepository", "postgres", DBconfigs.password, new AccountValidator())
         );
-        primaryStage.setResizable(false);
+        //primaryStage.setResizable(false);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 777, 395);
         primaryStage.setTitle("Sfantul 5");

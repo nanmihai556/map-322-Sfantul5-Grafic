@@ -40,7 +40,7 @@ public class UserPage implements Initializable {
     @FXML
     private Button addFriendButton;
     @FXML
-    private Button friendsButton2;
+    private Button seeChatButton;
     @FXML
     private Button removeFriendButton;
     @FXML
@@ -74,8 +74,8 @@ public class UserPage implements Initializable {
         ){
             removeFriendButton.setOpacity(1.0D);
             removeFriendButton.setDisable(false);
-            friendsButton2.setOpacity(1.0D);
-            friendsButton2.setDisable(false);
+            seeChatButton.setOpacity(1.0D);
+            seeChatButton.setDisable(false);
         }
         if(service.didF1RequestF2(MainUserSingleton.getInstance().getUser(),CurrentUserSingleton.getInstance().getUser())){
             removeFriendRequestButton.setOpacity(1.0D);
@@ -83,8 +83,13 @@ public class UserPage implements Initializable {
         }
 
     }
+
     public void userLogout(ActionEvent event) throws IOException {
         HelloApplication.changeScene("Home.fxml");
+    }
+
+    public void seeChat(ActionEvent event) throws IOException {
+        HelloApplication.changeScene("Chat.fxml");
     }
 
     public void addFriend(ActionEvent event) throws IOException {

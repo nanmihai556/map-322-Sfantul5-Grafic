@@ -51,6 +51,10 @@ public class FriendRequestPage implements Initializable {
         HelloApplication.changeScene("Home.fxml");
     }
 
+    public void seeChat(ActionEvent event) throws IOException {
+        HelloApplication.changeScene("Chat.fxml");
+    }
+
     public void userLogout(ActionEvent event) throws IOException{
         HelloApplication.changeScene("Login.fxml");
     }
@@ -146,6 +150,5 @@ public class FriendRequestPage implements Initializable {
         return userHBox;
     }
 
-    public void seeChat(ActionEvent event) throws IOException {
-        HelloApplication.changeScene("Chat.fxml");
-    }}
+
+}

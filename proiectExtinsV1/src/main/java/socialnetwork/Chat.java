@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -19,6 +20,7 @@ import socialnetwork.service.UserService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -34,7 +36,13 @@ public class Chat implements Initializable {
     private Label chatUserFirstNameLastName;
 
     @FXML
-    private VBox chatVbox;
+    private TextField chatField;
+
+    @FXML
+    private VBox chatVBox;
+
+    @FXML
+    private Button sendButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,7 +55,7 @@ public class Chat implements Initializable {
         chatUserFirstNameLastName.setText(name);
         List<Message> messages = service.showMessagesBetweenTwo(userId, chatUserId);
         for (Message message: messages){
-            chatVbox.getChildren().addAll(getMessageHbox(message));
+            chatVBox.getChildren().addAll(getMessageHbox(message));
         }
     }
 
@@ -55,18 +63,33 @@ public class Chat implements Initializable {
         UserService service = HelloApplication.getService();
         HBox messageHBox = new HBox();
         Text userName = new Text(userInfo(service.getUserById(message.getFrom())));
+        Text message1 = new Text(message.getMessage());
         Text messageDate = new Text(message.getDate().toString());
         messageHBox.setSpacing(10);
         userName.setFill(Color.BLACK);
         userName.setFont(Font.font ("Verdana", 20));
+        message1.setFill(Color.BLACK);
+        message1.setFont(Font.font ("Verdana", 20));
         messageDate.setFill(Color.BLACK);
         messageDate.setFont(Font.font ("Verdana", 10));
-        messageHBox.getChildren().addAll(userName,messageDate);
+        messageHBox.getChildren().addAll(userName,message1,messageDate);
         return messageHBox;
     }
 
     private String userInfo(User user){
         return user.getFirstName() + " " +user.getLastName();
+    }
+
+    public void sendMessage() throws IOException{
+        ArrayList<Long> user = new ArrayList<>();
+        user.add(CurrentUserSingleton.getInstance().getUser());
+        HelloApplication.getService().addMessage(MainUserSingleton.getInstance().getUser(),
+                                                 user,chatField.getText(),0);
+        HelloApplication.changeScene("Chat.fxml");
+    }
+
+    public void refresh() throws IOException{
+        HelloApplication.changeScene("Chat.fxml");
     }
 
     public void toUserPage() throws IOException {
