@@ -63,6 +63,10 @@ public class Home implements Initializable {
         HelloApplication.changeScene("FriendRequests.fxml");
     }
 
+    public void toSearch() throws IOException{
+        HelloApplication.changeScene("Search.fxml");
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         service = HelloApplication.getService();
