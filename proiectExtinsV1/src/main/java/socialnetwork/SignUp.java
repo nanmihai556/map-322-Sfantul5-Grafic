@@ -3,6 +3,7 @@ package socialnetwork;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import socialnetwork.domain.User;
 import socialnetwork.service.UserService;
@@ -20,9 +21,9 @@ public class SignUp {
     @FXML
     private TextField username;
     @FXML
-    private TextField password;
+    private PasswordField password;
     @FXML
-    private TextField confirmPassword;
+    private PasswordField confirmPassword;
     @FXML
     private TextField firstName;
     @FXML
