@@ -94,7 +94,8 @@ public class FriendRequestPage implements Initializable {
         Text userName = new Text(userInfo(user));
         Text userDate = new Text(dateOfFriendShip(user));
         userHBox.setSpacing(10);
-        userName.setFill(Color.BLACK);
+        Color c = Color.web("#FFEEDB", 1.0);
+        userName.setFill(c);
         userName.setFont(Font.font ("Verdana", 20));
         userDate.setFill(Color.BLACK);
         userDate.setFont(Font.font ("Verdana", 10));
@@ -140,11 +141,12 @@ public class FriendRequestPage implements Initializable {
         Text userDate = new Text(dateOfFriendShip(user));
         Text userStatus = new Text(status);
         userHBox.setSpacing(10);
-        userName.setFill(Color.BLACK);
+        Color c = Color.web("#FFEEDB", 1.0);
+        userName.setFill(c);
         userName.setFont(Font.font ("Verdana", 20));
         userDate.setFill(Color.BLACK);
         userDate.setFont(Font.font ("Verdana", 10));
-        userStatus.setFill(Color.BLACK);
+        userStatus.setFill(c);
         userStatus.setFont(Font.font ("Verdana", 20));
         userHBox.getChildren().addAll(userName,userStatus,userDate);
         return userHBox;

@@ -76,7 +76,8 @@ public class Search implements Initializable {
     private HBox getUserHbox(User user){
         HBox userHBox = new HBox();
         Text userName = new Text(userInfo(user));
-        userName.setFill(Color.BLACK);
+        Color c = Color.web("#FFEEDB", 1.0);
+        userName.setFill(c);
         userName.setFont(Font.font ("Verdana", 20));
         Button seeFriends = new Button("Click to see Profile");
         seeFriends.setStyle("-fx-background-color: #f06103; ");

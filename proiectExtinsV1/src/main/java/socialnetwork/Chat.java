@@ -62,14 +62,24 @@ public class Chat implements Initializable {
     private HBox getMessageHbox(Message message){
         UserService service = HelloApplication.getService();
         HBox messageHBox = new HBox();
-        Text userName = new Text(userInfo(service.getUserById(message.getFrom())));
+        Text userName = new Text(userInfo(service.getUserById(message.getFrom()))+":");
         Text message1 = new Text(message.getMessage());
         Text messageDate = new Text(message.getDate().toString());
         messageHBox.setSpacing(10);
-        userName.setFill(Color.BLACK);
-        userName.setFont(Font.font ("Verdana", 20));
-        message1.setFill(Color.BLACK);
-        message1.setFont(Font.font ("Verdana", 20));
+        if(message.getFrom().equals(CurrentUserSingleton.getInstance().getUser())) {
+            Color c = Color.web("#FFEEDB", 1.0);
+            userName.setFill(c);
+            userName.setFont(Font.font ("Verdana", 20));
+            message1.setFill(c);
+            message1.setFont(Font.font("Verdana", 20));
+        }
+        else {
+            Color c = Color.web("#fc6603", 1.0);
+            message1.setFill(c);
+            message1.setFont(Font.font ("Verdana", 20));
+            userName.setFill(c);
+            userName.setFont(Font.font ("Verdana", 20));
+        }
         messageDate.setFill(Color.BLACK);
         messageDate.setFont(Font.font ("Verdana", 10));
         messageHBox.getChildren().addAll(userName,message1,messageDate);
