@@ -37,7 +37,7 @@ public class HelloApplication extends Application {
         );
         //primaryStage.setResizable(false);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 777, 395);
+        Scene scene = new Scene(fxmlLoader.load(), 777, 470);
         primaryStage.setTitle("Sfantul 5");
         primaryStage.setScene(scene);
         primaryStage.show();
